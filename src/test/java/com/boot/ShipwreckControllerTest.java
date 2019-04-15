@@ -9,7 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ShipwreckControllerTest {
@@ -31,6 +34,10 @@ public class ShipwreckControllerTest {
         when(shipwreckRepository.findOne(1l)).thenReturn(sw);
 
         Shipwreck wreck = sc.get(1L);
-        assertEquals(1l, wreck.getId().longValue());
+
+        verify(shipwreckRepository).findOne(1l);
+
+//		assertEquals(1l, wreck.getId().longValue());
+        assertThat(wreck.getId(), is(1l));
     }
 }
